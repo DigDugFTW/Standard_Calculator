@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.stage.Stage?>
+<?import javafx.scene.Scene?>
+
+<Stage xmlns="http://javafx.com/javafx/8"
+       xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorMain.Controller" fx:id="fxStage" title="Calculator V1" >
+
+    <scene>
+        <Scene>
+            <root>
+                <VBox id="mainWrapper" fx:id="mainWrapper" stylesheets="@style.css" onKeyPressed="#handleButtonClicked">
+                    <children>
+                        <HBox styleClass="titleBar" fx:id="titleBar" onMousePressed="#titleBarPressed"
+                              onMouseDragged="#titleBarDragged" alignment="CENTER" spacing="80">
+                            <children>
+                                <HBox styleClass="leftTitleBar" >
+                                    <children>
+                                        <Label text="Calc_v1"/>
+                                    </children>
+                                </HBox>
+                                <HBox styleClass="rightTitleBar">
+                                    <children>
+                                        <Button id="minimizeButton" text="-" onAction="#minimize"/>
+                                        <Button id="closeButton" text="X" onAction="#close"
+                                                onMouseEntered="#mouseEnteredClose" onMouseExited="#mouseExitedClose"/>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <VBox styleClass="wrapper">
+                            <children>
+                                <VBox styleClass="buttonRows" alignment="CENTER" layoutX="0" layoutY="0" spacing="5.0">
+                                    <children>
+                                        <VBox styleClass="textFields" spacing="0">
+                                            <children>
+                                        <TextArea id="output" fx:id="output" editable="false" layoutX="0" layoutY="0"
+                                                  prefHeight="60.0"
+                                                  prefWidth="150.0"
+                                                  wrapText="true"
+                                        />
+                                            </children>
+                                        </VBox>
+                                        <VBox styleClass="numPadWrapper" alignment="CENTER" spacing="5.0">
+                                            <children>
+                                                <HBox alignment="TOP_CENTER" spacing="5.0">
+                                                    <children>
+                                                        <Button fx:id="memoryRecall" mnemonicParsing="false"
+                                                                onAction="#handleButtonClicked" text="MR"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="+M"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="DEL"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="AC"/>
+
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="TOP_CENTER" spacing="5.0">
+                                                    <children>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="7"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="8"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="9"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="/"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="TOP_CENTER" spacing="5.0">
+                                                    <children>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="4"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="5"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="6"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="X"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="TOP_CENTER" spacing="5.0">
+                                                    <children>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="1"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="2"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="3"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="-"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="TOP_CENTER" spacing="5.0">
+                                                    <children>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="0"/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="."/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="="/>
+                                                        <Button mnemonicParsing="false" onAction="#handleButtonClicked"
+                                                                text="+"/>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <VBox/>
+                </VBox>
+            </root>
+        </Scene>
+    </scene>
+
+</Stage>
+
