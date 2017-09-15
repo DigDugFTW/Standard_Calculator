@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Controller {
@@ -62,15 +63,13 @@ public class Controller {
     private String[] operatorQueue;
     private String memory;
     private int leftDecimalCount, rightDecimalCount, realOperatorQueueLength;
-    private boolean leftNeg = false, rightNeg = false;
+    private boolean leftNeg, rightNeg;
 
 
 
     // maybe move these methods up a little
     private String getEventType(ActionEvent event) {
-
         return ((Button) event.getSource()).getText();
-
     }
 
     private boolean isOperator(String string) {
@@ -82,7 +81,6 @@ public class Controller {
     }
 
     private boolean isFunctionKey(String string) throws NumberFormatException{
-
         if (string.equals("DEL") || string.equals("+M") || string.equals("MR") || string.equals("AC") || string.equals("=")) {
             return true;
         }
@@ -133,6 +131,7 @@ public class Controller {
                 break;
         }
 
+
         // updated to use function key method
         if (!isFunctionKey(getEventType(event))) {
             if (getEventType(event).equals(".")) {
@@ -163,12 +162,23 @@ public class Controller {
 
 
 // Rolling from here ****************************
-        // Reimplement rolling operation here
-        // rolling operation will be triggered after the user enters a second operator
-        // ex 1 + 2 + --> 3+
 
-        if (realOperatorQueueLength >= 2){
-            System.out.println("Rolling");
+        if (operatorQueue.length >= 1){
+            System.out.println("Operator Queue: "+Arrays.toString(operatorQueue));
+        }
+        if (isOperator(getEventType(event))){
+            if (leftNeg) {
+                System.out.println("Operator queue length >= 0");
+                if (operatorQueue[0].equals("-") && operatorQueue.length <= 1) {
+                    realOperatorQueueLength -= 1;
+                }
+            }
+
+            String currOp = getEventType(event);
+            realOperatorQueueLength+=1;
+            if (realOperatorQueueLength >= 2){
+                numberVerification(currOp);
+            }
         }
 
 
@@ -222,9 +232,10 @@ public class Controller {
                 }
                 /** LEFT NEGATIVE CHECK */
             } else if (leftNeg) {
-                System.out.println("Left side is negative");
-
-                output.setText((calculate(Double.parseDouble(numberQueue[1]) * -1, Double.parseDouble(numberQueue[2]), operatorQueue[operatorQueue.length - 1])) + append);
+                System.out.println("Left side is negative\nAnd here's the array info: "+Arrays.toString(operatorQueue));
+                if (operatorQueue.length >= 2) {
+                    output.setText((calculate(Double.parseDouble(numberQueue[1]) * -1, Double.parseDouble(numberQueue[2]), operatorQueue[operatorQueue.length - 1])) + append);
+                }
                 /** RIGHT NEGATIVE CHECK */
             } else if (rightNeg) {
                 System.out.println("Right side is negative");
@@ -282,8 +293,7 @@ public class Controller {
                 answer = -1;
 
         }
-
-        return answer;
+        return Double.parseDouble(String.format("%.5f", answer));
 
     }
 
