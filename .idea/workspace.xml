@@ -7,33 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/Calculator_jar/calc_v3.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Calculator/settingsIcon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/configScene.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/mainScene.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Calculator/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/CalculatorMain/configScene.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/CalculatorMain/mainScene.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/Calculator_jar/Calculator.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/Calculator_jar/Calculator[Conflict 1].jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/Calculator_jar/Calculator[Conflict].jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain (1)/Controller.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain (1)/FXMLMain.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain (1)/Main.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain (1)/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/FXMLMain.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Calculator/digital_7.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/CalculatorMain/FXMLMain.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/digital_7.ttf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/Controller.class" afterPath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/Main.class" afterPath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/Calculator_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Calculator_jar.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/Calculator_jar/calc_v3.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/style.css" afterPath="$PROJECT_DIR$/out/production/Calculator/CalculatorMain/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CalculatorMain/Controller.java" afterPath="$PROJECT_DIR$/src/CalculatorMain/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CalculatorMain/Main.java" afterPath="$PROJECT_DIR$/src/CalculatorMain/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CalculatorMain/style.css" afterPath="$PROJECT_DIR$/src/CalculatorMain/style.css" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -515,6 +490,14 @@
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
     </task>
+    <task id="LOCAL-00001" summary="Design update">
+      <created>1505622834112</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1505622834112</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -545,7 +528,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17071198" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20631067" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24838188" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -581,6 +564,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Design update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Design update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
