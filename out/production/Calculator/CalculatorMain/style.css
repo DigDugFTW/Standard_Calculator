@@ -1,103 +1,70 @@
-/* id # class . */
-/* fix class to id layout, class should point to id, id shouldn't point to id and same for class to class*/
-
-.buttonRows{
--fx-border-color:grey;
--fx-background-color:lightblue;
--fx-padding:6px;
+#mainWrapper{
+-fx-background-color:grey;
 }
 
-.buttonRows #secondaryOutput{
+#keyWrapper{
+-fx-background-color:lightgrey;
+}
 
+#minimize{
+-fx-font-size:4pt;
+-fx-text-fill:black;
+-fx-font-weight:bold;
+-fx-border-color:transparent black black black;
+-fx-pref-height:10px;
+-fx-max-height:10px;
+-fx-pref-width:35px;
+-fx-text-align:top;
+-fx-border-radius: 0 0 0 5;
+-fx-background-radius: 0 0 0 5;
 
 }
 
-.buttonRows #textFields{
--fx-border-color:black;
--fx-pref-height:90px;
--fx-pref-width:150px;
+#close{
+-fx-font-size:4pt;
+-fx-text-fill:black;
+-fx-font-weight:bold;
+-fx-border-color:transparent black black transparent;
+-fx-pref-height:10px;
+-fx-max-height:10px;
+-fx-pref-width:35px;
+-fx-border-radius: 0 0 0 0;
+-fx-background-radius: 0 0 0 0;
+}
 
+.button{
+-fx-background-radius:0 0 0 0;
+-fx-background-color:lightgrey;
+-fx-border-color:transparent transparent transparent transparent;
+}
+
+.button:hover{
+-fx-background-color:lightgrey;
+-fx-border-color:transparent transparent black transparent;
+
+}
+
+#configButton{
+-fx-background-image: url("/settingsIcon.png");
+-fx-background-repeat: no-repeat;
+-fx-background-position: center;
 }
 
 #output{
-
--fx-text-fill:#000000;
--fx-font-size:14pt;
--fx-border-color:black;
--fx-focus-color:transparent;
--fx-faint-focus-color:transparent;
-
+-fx-text-accent:green;
+-fx-font-size:15pt;
 }
 
-.numPadWrapper{
--fx-border-color:black;
--fx-background-color:grey;
--fx-padding:5px;
+.text-area .content{
+-fx-background-color:lightgrey;
 }
 
-.numPadWrapper .button{
--fx-pref-width:37px;
--fx-pref-height:30px;
--fx-background-color:black;
--fx-font-size:10px;
--fx-text-fill:white;
--fx-background-radius:0;
-}
-.numPadWrapper .button:hover{
--fx-background-color:grey;
--fx-border-color:black;
-}
-.numPadWrapper .button:pressed{
--fx-background-color:red;
+#titleBar{
+-fx-background-color: white;
 }
 
-.titleBar{
--fx-background-color:white;
 
-}
 
-.titleBar .button{
--fx-font-weight:bold;
--fx-pref-height:10px;
--fx-pref-width:20px;
--fx-background-color:white;
--fx-background-radius:0;
-}
 
-.titleBar .button:hover{
--fx-background-color:grey;
-}
-
-.wrapper{}
-#mainWrapper{}
-
-.rightTitleBar #closeButton{
--fx-pref-width:40px;
--fx-background-color:white;
--fx-font-size:10px;
--fx-text-fill:black;
-}
-.rightTitleBar #minimizeButton{
--fx-pref-width:40px;
--fx-font-weight:bold;
--fx-font-size:10px;
-}
-
-.rightTitleBar #closeButton:hover{
--fx-text-fill:white;
--fx-background-color:red;
-}
-.rightTitleBar #minimizeButton:hover{
--fx-background-color:grey;
--fx-text-fill:white;
-}
-
-.leftTitleBar .label{
--fx-text-fill:red;
--fx-font-weight:bold;
--fx-text-align:center;
--fx-padding:0 0 0 5;
-
-}
 
 

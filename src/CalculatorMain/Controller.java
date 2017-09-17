@@ -1,16 +1,23 @@
 package CalculatorMain;
 
+import com.sun.istack.internal.Nullable;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.util.Arrays;
 
 public class Controller {
+
 
     @FXML
     public void titleBarPressed(MouseEvent event) {
@@ -24,15 +31,18 @@ public class Controller {
         fxStage.setY(event.getScreenY() - mouseY);
     }
 
+
     @FXML
     public void minimize() {
         fxStage.setIconified(true);
     }
 
+
     @FXML
     public void close() {
         fxStage.close();
     }
+
 
     @FXML
     public void mouseEnteredClose() {
@@ -42,15 +52,20 @@ public class Controller {
     public void mouseExitedClose() {
     }
 
+    @FXML
+    public void keyPressed(KeyEvent keyEvent) {
+        System.out.println(keyEvent.getText());
+
+
+        handleButtonClicked(keyEvent);
+
+    }
+
 
     @FXML
     TextArea output;
     @FXML
-    Button memoryRecall;
-    @FXML
     HBox titleBar;
-    @FXML
-    VBox mainWrapper;
     @FXML
     Stage fxStage;
 
@@ -64,44 +79,61 @@ public class Controller {
     private boolean leftNeg, rightNeg;
 
 
-
     // maybe move these methods up a little
-    private String getEventType(ActionEvent event) {
-        return ((Button) event.getSource()).getText();
+
+
+    /**
+     * @param event Pass button event as parameter to get button text
+     * @return the text location on the button
+     */
+
+    private String getEventType(Event event) {
+        if (!event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
+            return (((Button) event.getSource()).getText());
+
+        } else if (((KeyEvent) event).getCode().isKeypadKey() || isOperator(((KeyEvent) event).getText()) || ((KeyEvent) event).getText().equals(".")) {
+            return ((KeyEvent) event).getText();
+        } else if (((KeyEvent) event).getCode().equals(KeyCode.ENTER)) {
+            return "=";
+        } else if (((KeyEvent) event).getCode().equals(KeyCode.MULTIPLY)) {
+            return "X";
+        } else if (((KeyEvent) event).getCode().equals(KeyCode.BACK_SPACE)) {
+            return "DEL";
+        } else if (((KeyEvent) event).isShiftDown()) {
+            return "AC";
+        } else
+            return "";
     }
 
     private boolean isOperator(String string) {
-        if (string != null && (string.equals("X") || string.equals("/") || string.equals("+") || string.equals("-"))) {
+        if (string != null && (string.equals("X") || string.equals("/") || string.equals("+") || string.equals("-")
+                || string.equals("ADD") || string.equals("MULTIPLY") || string.equals("SUBTRACT") || string.equals("DIVIDE"))) {
             return true;
         }
         return false;
 
     }
 
-    private boolean isFunctionKey(String string) throws NumberFormatException{
-        if (string.equals("DEL") || string.equals("+M") || string.equals("MR") || string.equals("AC") || string.equals("=")) {
+
+    private boolean isFunctionKey(String string) throws NumberFormatException {
+        if (string.equals("DEL") || string.equals("+M") || string.equals("MR") || string.equals("AC") || string.equals("=") || string.equals("ENTER") || string.equals("x^2") || string.equals("x^3")) {
             return true;
         }
         return false;
     }
 
-    private boolean isInt(String string) throws NumberFormatException{
-        if (Integer.parseInt(string) >= 0) {
-            return true;
-        }
-        return false;
-    }
-
-
-    public void handleButtonClicked(ActionEvent event) {
+    public void handleButtonClicked(Event event) {
+        System.out.println("##################################\nEVENT: " + event + "\n##################################");
         numberQueue = output.getText().split("[^0-9.]");
         operatorQueue = output.getText().split("[0-9.=]");
 
         // switch determines key press (function keys)
+        String tmp_output = output.getText();
         switch (getEventType(event)) {
+
             case "AC":
                 leftDecimalCount = rightDecimalCount = realOperatorQueueLength = 0;
-                for (int i = 0; i < operatorQueue.length-1; i++){
+                for (int i = 0; i < operatorQueue.length - 1; i++) {
                     operatorQueue[i] = "";
                 }
                 output.clear();
@@ -118,10 +150,22 @@ public class Controller {
                 if (!output.getText().isEmpty())
                     output.deleteText(output.getLength() - 1, output.getLength());
                 break;
-            case ".":
+            case "x^2":
                 // do nothing special
+                output.clear();
+                output.appendText(Math.pow(Double.parseDouble(tmp_output), 2) + "");
+                break;
+            case "x^3":
+                output.clear();
+                output.appendText(Math.pow(Double.parseDouble(tmp_output), 3) + "");
                 break;
             case "=":
+                if (!output.getText().isEmpty()) {
+                    leftDecimalCount = rightDecimalCount = realOperatorQueueLength = 0;
+                    numberVerification("");
+                }
+                break;
+            case "ENTER":
                 if (!output.getText().isEmpty()) {
                     leftDecimalCount = rightDecimalCount = realOperatorQueueLength = 0;
                     numberVerification("");
@@ -142,7 +186,7 @@ public class Controller {
                     rightDecimalCount += 1;
                 }
             }
-            System.out.println("left decimal count "+leftDecimalCount+", right decimal count "+rightDecimalCount);
+            System.out.println("left decimal count " + leftDecimalCount + ", right decimal count " + rightDecimalCount);
             if (rightDecimalCount <= 1 && leftDecimalCount <= 1) {
                 System.out.println("Appending here 1 ");
                 output.appendText(getEventType(event));
@@ -156,15 +200,12 @@ public class Controller {
         }
 
 
-
-
-
 // Rolling from here ****************************
 
-        if (operatorQueue.length >= 1){
-            System.out.println("Operator Queue: "+Arrays.toString(operatorQueue));
+        if (operatorQueue.length >= 1) {
+            System.out.println("Operator Queue: " + Arrays.toString(operatorQueue));
         }
-        if (isOperator(getEventType(event))){
+        if (isOperator(getEventType(event))) {
             if (leftNeg) {
                 System.out.println("Operator queue length >= 0");
                 if (operatorQueue[0].equals("-") && operatorQueue.length <= 1) {
@@ -173,8 +214,8 @@ public class Controller {
             }
 
             String currOp = getEventType(event);
-            realOperatorQueueLength+=1;
-            if (realOperatorQueueLength >= 2){
+            realOperatorQueueLength += 1;
+            if (realOperatorQueueLength >= 2) {
                 numberVerification(currOp);
             }
         }
@@ -185,14 +226,18 @@ public class Controller {
 
     }
 
+    /**
+     * @param append What is appended after calculation
+     *               ex: 1+2+ would result in 3+ for the next calculation
+     */
 
     private void numberVerification(String append) {
 
-        if (append.equals("=")) append = "";
+        if (append.equals("=") || append.equals("x^2") || append.equals("x^3")) append = "";
 
 
         // for rolling calculation
-        /** Runs left side Check */
+        /* Runs left side Check */
         if (operatorQueue.length >= 1) {
             if (operatorQueue[0].equals("-")) {
                 leftNeg = true;
@@ -201,7 +246,7 @@ public class Controller {
             }
 
 
-            /** RIGHT SIDE CHECK */
+            /* RIGHT SIDE CHECK */
             if (operatorQueue.length >= 2) {
                 // operator queues' length changes depending on number of inputs 6.23 - 6 --> [,,,-]
                 if (operatorQueue[operatorQueue.length - 1].endsWith("-")) {
@@ -210,12 +255,12 @@ public class Controller {
                     rightNeg = false;
                 }
             }
-            /** DOUBLE NEGATIVE CHECK*/
+            /* DOUBLE NEGATIVE CHECK*/
             if (leftNeg && rightNeg) {
                 System.out.println("Both sides are negative");
                 // if the last element of operator queue equals "-" (check for num - num)
 
-                /** CHECK FOR SINGLE OPERATOR (GIVEN LEFT IS NEGATIVE) */
+                /* CHECK FOR SINGLE OPERATOR (GIVEN LEFT IS NEGATIVE) */
                 if (operatorQueue[operatorQueue.length - 1].equals("-")) {
                     output.setText(calculate(Double.parseDouble(numberQueue[1]) * -1, Double.parseDouble(numberQueue[numberQueue.length - 1]) * -1, "+") + append);
                     // else (check for num x- num or num /- num and so on
@@ -228,28 +273,28 @@ public class Controller {
                     } else
                         output.setText(calculate(Double.parseDouble(numberQueue[1]), Double.parseDouble(numberQueue[numberQueue.length - 1]), negnegArrOpArray[0]) + append);
                 }
-                /** LEFT NEGATIVE CHECK */
+                /* LEFT NEGATIVE CHECK */
             } else if (leftNeg) {
-                System.out.println("Left side is negative\nAnd here's the array info: "+Arrays.toString(operatorQueue));
+                System.out.println("Left side is negative\nAnd here's the array info: " + Arrays.toString(operatorQueue));
                 if (operatorQueue.length >= 2) {
                     output.setText((calculate(Double.parseDouble(numberQueue[1]) * -1, Double.parseDouble(numberQueue[2]), operatorQueue[operatorQueue.length - 1])) + append);
                 }
-                /** RIGHT NEGATIVE CHECK */
+                /* RIGHT NEGATIVE CHECK */
             } else if (rightNeg) {
                 System.out.println("Right side is negative");
-                /** TEMP REMOVAL OF LOGIC (rightOpBreakDown.length - 1 <= 1)*/
-                /** CHECK FOR MULTI-OPERATOR (X-, /-)*/
+                /* TEMP REMOVAL OF LOGIC (rightOpBreakDown.length - 1 <= 1)*/
+                /* CHECK FOR MULTI-OPERATOR (X-, /-)*/
                 if (operatorQueue[operatorQueue.length - 1].length() <= 1) {
                     // this block is assuming that the right side only contains a negative sign, best conditional above
                     // if the right side has just a minus
                     output.setText((calculate(Double.parseDouble(numberQueue[0]), Double.parseDouble(numberQueue[numberQueue.length - 1]) * -1, "+")) + append);
-                    /** ELSE THERE IS MULTIPLE OPERATORS (X-, /- IS PRESENT)*/
+                    /* ELSE THERE IS MULTIPLE OPERATORS (X-, /- IS PRESENT)*/
                 } else {
                     // else if the right side has more than a minus (X-,/-)
                     String[] rightIsNegativeArrayNumberTwo = operatorQueue[operatorQueue.length - 1].split("[-]");
                     output.setText((calculate(Double.parseDouble(numberQueue[0]), Double.parseDouble(numberQueue[2]) * -1, rightIsNegativeArrayNumberTwo[0])) + append);
                 }
-                /** ELSE BOTH SIDES ARE POSITIVE */
+                /* ELSE BOTH SIDES ARE POSITIVE */
             } else {
                 System.out.println("Both sides are positive");
                 output.setText(calculate(Double.parseDouble(numberQueue[0]), Double.parseDouble(numberQueue[1]), operatorQueue[operatorQueue.length - 1]) + append);
@@ -265,7 +310,7 @@ public class Controller {
         System.out.println(" Real operator queue length " + realOperatorQueueLength);
         System.out.println("##########################");
 
-        double answer;
+        double answer = 0;
         switch (operator) {
             case "+":
                 answer = left + right;
@@ -282,9 +327,16 @@ public class Controller {
             case "/":
                 answer = left / right;
                 break;
-            // haven't added modulus (need room)
             case "%":
                 answer = left % right;
+                break;
+            case "^":
+                answer = Math.pow(left, right);
+                break;
+            case "E":
+                // may process numbers in scientific notation x+(y * 10^substring("E"))
+
+
                 break;
 
             default:
