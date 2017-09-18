@@ -1,20 +1,15 @@
 package CalculatorMain;
 
-import com.sun.istack.internal.Nullable;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Arrays;
 
 public class Controller {
 
@@ -44,21 +39,10 @@ public class Controller {
     }
 
 
-    @FXML
-    public void mouseEnteredClose() {
-    }
-
-    @FXML
-    public void mouseExitedClose() {
-    }
 
     @FXML
     public void keyPressed(KeyEvent keyEvent) {
-        System.out.println(keyEvent.getText());
-
-
         handleButtonClicked(keyEvent);
-
     }
 
 
@@ -90,7 +74,6 @@ public class Controller {
     private String getEventType(Event event) {
         if (!event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
             return (((Button) event.getSource()).getText());
-
         } else if (((KeyEvent) event).getCode().isKeypadKey() || isOperator(((KeyEvent) event).getText()) || ((KeyEvent) event).getText().equals(".")) {
             return ((KeyEvent) event).getText();
         } else if (((KeyEvent) event).getCode().equals(KeyCode.ENTER)) {
@@ -106,24 +89,19 @@ public class Controller {
     }
 
     private boolean isOperator(String string) {
-        if (string != null && (string.equals("X") || string.equals("/") || string.equals("+") || string.equals("-")
-                || string.equals("ADD") || string.equals("MULTIPLY") || string.equals("SUBTRACT") || string.equals("DIVIDE"))) {
-            return true;
-        }
-        return false;
+  return string != null && (string.equals("X") || string.equals("/") || string.equals("+") || string.equals("-")
+          || string.equals("ADD") || string.equals("MULTIPLY") || string.equals("SUBTRACT") || string.equals("DIVIDE"));
+
 
     }
 
 
     private boolean isFunctionKey(String string) throws NumberFormatException {
-        if (string.equals("DEL") || string.equals("+M") || string.equals("MR") || string.equals("AC") || string.equals("=") || string.equals("ENTER") || string.equals("x^2") || string.equals("x^3")) {
-            return true;
-        }
-        return false;
+       return string.equals("DEL") || string.equals("+M") || string.equals("MR") || string.equals("AC") || string.equals("=") || string.equals("ENTER") || string.equals("x^2") || string.equals("x^3");
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void handleButtonClicked(Event event) {
-        System.out.println("##################################\nEVENT: " + event + "\n##################################");
         numberQueue = output.getText().split("[^0-9.]");
         operatorQueue = output.getText().split("[0-9.=]");
 
@@ -186,13 +164,10 @@ public class Controller {
                     rightDecimalCount += 1;
                 }
             }
-            System.out.println("left decimal count " + leftDecimalCount + ", right decimal count " + rightDecimalCount);
             if (rightDecimalCount <= 1 && leftDecimalCount <= 1) {
-                System.out.println("Appending here 1 ");
                 output.appendText(getEventType(event));
             } else {
                 if (!getEventType(event).equals(".")) {
-                    System.out.println("Appending here 2 ");
                     output.appendText(getEventType(event));
                 }
             }
@@ -203,7 +178,7 @@ public class Controller {
 // Rolling from here ****************************
 
         if (operatorQueue.length >= 1) {
-            System.out.println("Operator Queue: " + Arrays.toString(operatorQueue));
+            System.out.println("Operator queue is greater or equal to 1");
         }
         if (isOperator(getEventType(event))) {
             if (leftNeg) {
@@ -212,7 +187,6 @@ public class Controller {
                     realOperatorQueueLength -= 1;
                 }
             }
-
             String currOp = getEventType(event);
             realOperatorQueueLength += 1;
             if (realOperatorQueueLength >= 2) {
@@ -230,7 +204,6 @@ public class Controller {
      * @param append What is appended after calculation
      *               ex: 1+2+ would result in 3+ for the next calculation
      */
-
     private void numberVerification(String append) {
 
         if (append.equals("=") || append.equals("x^2") || append.equals("x^3")) append = "";
@@ -246,6 +219,8 @@ public class Controller {
             }
 
 
+
+
             /* RIGHT SIDE CHECK */
             if (operatorQueue.length >= 2) {
                 // operator queues' length changes depending on number of inputs 6.23 - 6 --> [,,,-]
@@ -257,7 +232,6 @@ public class Controller {
             }
             /* DOUBLE NEGATIVE CHECK*/
             if (leftNeg && rightNeg) {
-                System.out.println("Both sides are negative");
                 // if the last element of operator queue equals "-" (check for num - num)
 
                 /* CHECK FOR SINGLE OPERATOR (GIVEN LEFT IS NEGATIVE) */
@@ -275,13 +249,11 @@ public class Controller {
                 }
                 /* LEFT NEGATIVE CHECK */
             } else if (leftNeg) {
-                System.out.println("Left side is negative\nAnd here's the array info: " + Arrays.toString(operatorQueue));
                 if (operatorQueue.length >= 2) {
                     output.setText((calculate(Double.parseDouble(numberQueue[1]) * -1, Double.parseDouble(numberQueue[2]), operatorQueue[operatorQueue.length - 1])) + append);
                 }
                 /* RIGHT NEGATIVE CHECK */
             } else if (rightNeg) {
-                System.out.println("Right side is negative");
                 /* TEMP REMOVAL OF LOGIC (rightOpBreakDown.length - 1 <= 1)*/
                 /* CHECK FOR MULTI-OPERATOR (X-, /-)*/
                 if (operatorQueue[operatorQueue.length - 1].length() <= 1) {
@@ -296,20 +268,12 @@ public class Controller {
                 }
                 /* ELSE BOTH SIDES ARE POSITIVE */
             } else {
-                System.out.println("Both sides are positive");
                 output.setText(calculate(Double.parseDouble(numberQueue[0]), Double.parseDouble(numberQueue[1]), operatorQueue[operatorQueue.length - 1]) + append);
             }
         }
     }
 
     private double calculate(double left, double right, String operator) {
-        System.out.println("##########################");
-        System.out.println("Number Queue: " + Arrays.toString(numberQueue));
-        System.out.println("Operator Queue: " + Arrays.toString(operatorQueue));
-        System.out.println(left + ", " + right + " " + operator);
-        System.out.println(" Real operator queue length " + realOperatorQueueLength);
-        System.out.println("##########################");
-
         double answer = 0;
         switch (operator) {
             case "+":
@@ -335,17 +299,11 @@ public class Controller {
                 break;
             case "E":
                 // may process numbers in scientific notation x+(y * 10^substring("E"))
-
-
                 break;
-
             default:
                 answer = -1;
 
         }
         return Double.parseDouble(String.format("%.5f", answer));
-
     }
-
-
 }

@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
-        primaryStage.getIcons().add(new Image("calculatoricon.png"));
+        primaryStage.getIcons().add(new Image("calculatorIcon.png"));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
