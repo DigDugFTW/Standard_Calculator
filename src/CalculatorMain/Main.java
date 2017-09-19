@@ -14,6 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage = FXMLLoader.load(getClass().getResource("mainScene.fxml"));
         primaryStage.getIcons().add(new Image("calculatorIcon.png"));
+        primaryStage.setAlwaysOnTop(true);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
