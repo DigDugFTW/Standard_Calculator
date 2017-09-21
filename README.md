@@ -2,7 +2,7 @@
 # Standard Calculator
 
 Standard Non-scientific calculator, for update info etc go to
-digdug.cf/downloads (website is down right now) to see more info.
+digdug.cf/downloads to see more info.
 
 
 # Information
